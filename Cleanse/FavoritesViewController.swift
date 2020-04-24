@@ -390,7 +390,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                
                let backgroundcounter = Int.random(in: 1..<20)
 
-               cell.likesnumber.text = "\(backgroundcounter)K"
                
                cell.selectionStyle = .none
                let dateFormatter = DateFormatter()
@@ -402,7 +401,20 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                let date = dateFormatter.date(from:publisheddate)!
                
+            id = book?.bookID ?? ""
+
                let dateago = date.timeAgoSinceDate()
+            
+                             
+                             if let favoritenumber = book?.views {
+                                 
+                                 cell.likesnumber.text = "\(String(favoritenumber))K"
+                                 
+
+                             } else {
+                                 
+                                 ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                             }
                
                
                cell.datelabel.text = dateago

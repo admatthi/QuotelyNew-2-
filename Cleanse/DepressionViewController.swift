@@ -408,12 +408,21 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.quote.text = book?.headline1
         
         cell.taplike.tag = indexPath.row
-        
+            id = book?.bookID ?? ""
         cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
         
         let backgroundcounter = Int.random(in: 1..<20)
+            
+            if let favoritenumber = book?.views {
+                
+                cell.likesnumber.text = "\(String(favoritenumber))K"
+                
 
-        cell.likesnumber.text = "\(backgroundcounter)K"
+            } else {
+                
+                ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+            }
+
             
             var bookiddata = book?.bookID ?? "x"
             

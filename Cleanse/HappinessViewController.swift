@@ -406,10 +406,23 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           cell.taplike.tag = indexPath.row
           
           cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+            
+            id = book?.bookID ?? ""
           
           let backgroundcounter = Int.random(in: 1..<20)
 
           cell.likesnumber.text = "\(backgroundcounter)K"
+            
+                             
+                             if let favoritenumber = book?.views {
+                                 
+                                 cell.likesnumber.text = "\(String(favoritenumber))K"
+                                 
+
+                             } else {
+                                 
+                                 ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                             }
           
           cell.selectionStyle = .none
             

@@ -361,11 +361,24 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
             
             let backgroundcounter = Int.random(in: 1..<20)
 
+                id = book?.bookID ?? ""
+
             cell.likesnumber.text = "\(backgroundcounter)K"
             
                 var bookiddata = book?.bookID ?? "x"
                                 
                             quoteViewed(id: bookiddata)
+                
+                                 
+                                 if let favoritenumber = book?.views {
+                                     
+                                     cell.likesnumber.text = "\(String(favoritenumber))K"
+                                     
+
+                                 } else {
+                                     
+                                     ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                                 }
                 
             cell.selectionStyle = .none
       let dateFormatter = DateFormatter()

@@ -407,9 +407,21 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            let backgroundcounter = Int.random(in: 1..<20)
 
-           cell.likesnumber.text = "\(backgroundcounter)K"
            
            cell.selectionStyle = .none
+            
+            id = book?.bookID ?? ""
+            
+                    
+                    if let favoritenumber = book?.views {
+                        
+                        cell.likesnumber.text = "\(String(favoritenumber))K"
+                        
+
+                    } else {
+                        
+                        ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                    }
             
             var bookiddata = book?.bookID ?? "x"
                   
