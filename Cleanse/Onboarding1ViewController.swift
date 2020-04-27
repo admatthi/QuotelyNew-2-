@@ -14,11 +14,17 @@ class Onboarding1ViewController: UIViewController, UNUserNotificationCenterDeleg
    
     @IBAction func tapNext(_ sender: Any) {
         
+        logGetStarted(referrer: "onboarding1")
         self.performSegue(withIdentifier: "step1tostep2", sender: self)
     }
     
     func logScreenView(referrer : String) {
-                                AppEvents.logEvent(AppEvents.Name(rawValue: "Onboarding1"), parameters: ["" : ""])
+                                AppEvents.logEvent(AppEvents.Name(rawValue: "Onboarding1"), parameters: ["genre" : "genre"])
+                            }
+    
+    
+    func logGetStarted(referrer : String) {
+                                AppEvents.logEvent(AppEvents.Name(rawValue: "GetStarted"), parameters: ["genre" : "genre"])
                             }
     
     

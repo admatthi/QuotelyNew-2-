@@ -512,7 +512,6 @@ class AudioViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
 
-            ref = Database.database().reference()
 
             setupRemoteTransportControls()
             setupNowPlaying()

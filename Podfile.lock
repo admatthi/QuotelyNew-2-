@@ -1,65 +1,72 @@
 PODS:
-  - AppsFlyerFramework (5.2.0)
-  - FBSDKCoreKit (6.5.0):
-    - FBSDKCoreKit/Basics (= 6.5.0)
-    - FBSDKCoreKit/Core (= 6.5.0)
-  - FBSDKCoreKit/Basics (6.5.0)
-  - FBSDKCoreKit/Core (6.5.0):
+  - AppsFlyerFramework (5.1.0)
+  - FBSDKCoreKit (5.15.0):
+    - FBSDKCoreKit/Basics (= 5.15.0)
+    - FBSDKCoreKit/Core (= 5.15.0)
+  - FBSDKCoreKit/Basics (5.15.0)
+  - FBSDKCoreKit/Core (5.15.0):
     - FBSDKCoreKit/Basics
-  - Firebase/Analytics (6.23.0):
+  - Firebase/Analytics (6.16.0):
     - Firebase/Core
-  - Firebase/Core (6.23.0):
+  - Firebase/Core (6.16.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.4.2)
-  - Firebase/CoreOnly (6.23.0):
-    - FirebaseCore (= 6.6.7)
-  - Firebase/Database (6.23.0):
+    - FirebaseAnalytics (= 6.2.2)
+  - Firebase/CoreOnly (6.16.0):
+    - FirebaseCore (= 6.6.1)
+  - Firebase/Crashlytics (6.16.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 6.2.0)
-  - Firebase/Messaging (6.23.0):
+    - FirebaseCrashlytics (~> 4.0.0-beta.2)
+  - Firebase/Database (6.16.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 4.3.1)
-  - Firebase/Storage (6.23.0):
+    - FirebaseDatabase (~> 6.1.4)
+  - Firebase/Messaging (6.16.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 3.6.1)
-  - FirebaseAnalytics (6.4.2):
+    - FirebaseMessaging (~> 4.2.0)
+  - Firebase/Storage (6.16.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.5.0)
+  - FirebaseAnalytics (6.2.2):
     - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.2)
-    - GoogleAppMeasurement (= 6.4.2)
+    - FirebaseInstanceID (~> 4.3)
+    - GoogleAppMeasurement (= 6.2.2)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
   - FirebaseAnalyticsInterop (1.5.0)
-  - FirebaseAuthInterop (1.1.0)
-  - FirebaseCore (6.6.7):
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (6.6.1):
     - FirebaseCoreDiagnostics (~> 1.2)
     - FirebaseCoreDiagnosticsInterop (~> 1.2)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.2.4):
+  - FirebaseCoreDiagnostics (1.2.0):
     - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 3.0)
+    - GoogleDataTransportCCTSupport (~> 1.3)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseDatabase (6.2.0):
+  - FirebaseCrashlytics (4.0.0-beta.2):
+    - FirebaseAnalyticsInterop (~> 1.2)
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstanceID (~> 4.3)
+    - PromisesObjC (~> 1.2)
+  - FirebaseDatabase (6.1.4):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - leveldb-library (~> 1.22)
-  - FirebaseInstallations (1.2.0):
+  - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.5)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (4.3.4):
+  - FirebaseInstanceID (4.3.0):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
-  - FirebaseMessaging (4.3.1):
+  - FirebaseMessaging (4.2.0):
     - FirebaseAnalyticsInterop (~> 1.5)
     - FirebaseCore (~> 6.6)
     - FirebaseInstanceID (~> 4.3)
@@ -68,65 +75,67 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - FirebaseStorage (3.6.1):
-    - FirebaseAuthInterop (~> 1.1)
-    - FirebaseCore (~> 6.6)
+  - FirebaseStorage (3.5.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleAppMeasurement (6.4.2):
+  - GoogleAppMeasurement (6.2.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
-  - GoogleDataTransport (6.0.0)
-  - GoogleDataTransportCCTSupport (3.0.0):
-    - GoogleDataTransport (~> 6.0)
+  - GoogleDataTransport (3.3.1)
+  - GoogleDataTransportCCTSupport (1.3.1):
+    - GoogleDataTransport (~> 3.3)
     - nanopb (~> 0.3.901)
-  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.5.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.6.0):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/Environment (6.5.1)
+  - GoogleUtilities/Logger (6.5.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.6.0):
+  - GoogleUtilities/MethodSwizzler (6.5.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.6.0):
+  - GoogleUtilities/Network (6.5.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.6.0)"
-  - GoogleUtilities/Reachability (6.6.0):
+  - "GoogleUtilities/NSData+zlib (6.5.1)"
+  - GoogleUtilities/Reachability (6.5.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.5.1):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.3.1)
-  - Kingfisher (5.13.4):
-    - Kingfisher/Core (= 5.13.4)
-  - Kingfisher/Core (5.13.4)
+  - Kingfisher (5.13.0):
+    - Kingfisher/Core (= 5.13.0)
+  - Kingfisher/Core (5.13.0)
   - leveldb-library (1.22)
+  - MBProgressHUD (1.2.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
-  - Protobuf (3.11.4)
-  - Purchases (3.2.2)
+  - Protobuf (3.11.2)
+  - Purchases (3.0.2)
 
 DEPENDENCIES:
   - AppsFlyerFramework
   - FBSDKCoreKit
   - Firebase/Analytics
+  - Firebase/Crashlytics
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - MBProgressHUD
   - Purchases
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - AppsFlyerFramework
     - FBSDKCoreKit
     - Firebase
@@ -136,6 +145,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseCrashlytics
     - FirebaseDatabase
     - FirebaseInstallations
     - FirebaseInstanceID
@@ -148,38 +158,41 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - leveldb-library
+    - MBProgressHUD
     - nanopb
     - PromisesObjC
     - Protobuf
     - Purchases
 
 SPEC CHECKSUMS:
-  AppsFlyerFramework: 9b2a932d826a278413dab7d59ffbe104a972132b
-  FBSDKCoreKit: bc8ba4b97454bc722823e72584547770b8b48030
-  Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
-  FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
+  AppsFlyerFramework: b5e6d0d1718c445eeb151769e97246c00ae4628d
+  FBSDKCoreKit: 083ba8c8e37939c0b4c84250654c9be0aef0c2f8
+  Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
+  FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
-  FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
-  FirebaseCore: a2788a0d5f6c1dff17b8f79b4a73654a8d4bfdbd
-  FirebaseCoreDiagnostics: b59c024493a409f8aecba02c99928d0d8431d159
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 85064903ed6c28e47fec9c7bd149d94ba1b6b6e7
+  FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseDatabase: cbf2b9efe39b3f113616a2f1f140839f49d797e0
-  FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
-  FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
-  FirebaseMessaging: 828e66eb357a893e3cebd9ee0f6bc1941447cc94
-  FirebaseStorage: f4f39ae834a7145963b913f54e2f24a9db1d8fac
-  GoogleAppMeasurement: 2253e99c1f22638cf234c059144660c338ad76c3
-  GoogleDataTransport: 061fe7d9b476710e3cd8ea51e8e07d8b67c2b420
-  GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  FirebaseCrashlytics: aec855c2157989f8bfd396f8fd2d199e0e027840
+  FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
+  FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
+  FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
+  FirebaseMessaging: 448cf4c727f3c95f4f90816907d67306ba785cfe
+  FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
+  GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
+  GoogleDataTransport: 0048df6388dab1c254799f2a30365b1dffe20422
+  GoogleDataTransportCCTSupport: f880d70972efa2ed1be4e9173a0f4c5f3dc2d176
+  GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
-  Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
+  Kingfisher: 0d334cada987fcddbe9b5cec516406e1ee9d4748
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
-  Purchases: 392c729893c011c7d4d37d7f7c9f863e597d4a9b
+  Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
+  Purchases: 7911f2e302e3aba4b107c96a0608e14fd8a54e4e
 
-PODFILE CHECKSUM: 35d1168beae5b3c903f2dfb229107cac49d173f4
+PODFILE CHECKSUM: d9ca44ee01d22b87c7a91a28e2b977700ce875cc
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.6.1

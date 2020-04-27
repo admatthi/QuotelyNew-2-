@@ -24,6 +24,9 @@ class SleepViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     var selectedindex = Int()
     
+
+
+    
     @IBOutlet weak var genreCollectionView: UICollectionView!
     @IBOutlet weak var titleCollectionView: UICollectionView!
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

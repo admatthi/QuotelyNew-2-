@@ -5,6 +5,9 @@ target 'Cleanse' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+  # Pods for Cleanse
+
+pod 'Firebase/Crashlytics'
 pod 'Firebase/Analytics'
 pod 'Kingfisher'
 pod 'Firebase/Database'
@@ -13,8 +16,7 @@ pod 'Purchases'
 pod 'FBSDKCoreKit'
 pod 'Firebase/Messaging'
 pod 'AppsFlyerFramework'
-
-  # Pods for Cleanse
+pod 'MBProgressHUD'
 
   target 'CleanseTests' do
     inherit! :search_paths

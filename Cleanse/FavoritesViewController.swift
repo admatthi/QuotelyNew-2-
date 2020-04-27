@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
-
+import MBProgressHUD
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func logFavoriteTapped(referrer : String) {
                AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
@@ -38,6 +38,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                    
                    let book = self.book(atIndex: 0)
                    tableView.reloadData()
+                MBProgressHUD.hide(for: view, animated: true)
+
                    //            if book?.bookID == "Title" {
                    //
                    //                return cell
@@ -454,7 +456,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
            override func viewDidLoad() {
                super.viewDidLoad()
                
-               
+               let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
                let swipeLeftRec = UISwipeGestureRecognizer()
                let swipeUpRec = UISwipeGestureRecognizer()
                let swipeDownRec = UISwipeGestureRecognizer()

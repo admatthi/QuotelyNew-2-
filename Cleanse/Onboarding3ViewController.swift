@@ -14,7 +14,7 @@ import FBSDKCoreKit
 class Onboarding3ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
    func logNotificationsSettings(referrer : String) {
-                                  AppEvents.logEvent(AppEvents.Name(rawValue: "notifications enabled"), parameters: ["" : ""])
+                                  AppEvents.logEvent(AppEvents.Name(rawValue: "notifications enabled"), parameters: ["test" : "test"])
                               }
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -59,6 +59,7 @@ class Onboarding3ViewController: UIViewController, UNUserNotificationCenterDeleg
                  }
             
             
+            referrer = "Onboarding"
 
             logScreenView(referrer: "onboarding3")
 

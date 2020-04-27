@@ -11,7 +11,7 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
-
+import MBProgressHUD
 class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
    func logFavoriteTapped(referrer : String) {
@@ -41,6 +41,8 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
                
                let book = self.book(atIndex: 0)
                tableView.reloadData()
+            MBProgressHUD.hide(for: view, animated: true)
+
                //            if book?.bookID == "Title" {
                //
                //                return cell
@@ -198,17 +200,14 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
                    let textField = alert.textFields![0] // Force unwrapping because we know it exists.
                    
                    if textField.text != "" {
-                       
-                       if actualdiscount == textField.text! {
-                           
+                                                  
                            didpurchase = true
                            
                            ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                            
                        }
                        
-                   }
-                   
+                            
                    
                case .cancel:
                    print("cancel")
@@ -292,6 +291,8 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
                  tableView.reloadData()
 
              } else {
+
+                logFavoriteTapped(referrer: referrer)
 
                ref?.child(uid).child("Favorites").child(bookID ?? "").updateChildValues(["Author": author, "Name": name, "Image": imageURL])
 
@@ -512,7 +513,8 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            let swipeUpRec = UISwipeGestureRecognizer()
            let swipeDownRec = UISwipeGestureRecognizer()
            let swipeRightRec = UISwipeGestureRecognizer()
-           
+           let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
            queryforwishlists()
            
 //                               let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)

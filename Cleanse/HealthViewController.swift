@@ -11,6 +11,7 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
+import MBProgressHUD
 class HealthViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
      func logFavoriteTapped(referrer : String) {
             AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
@@ -39,6 +40,8 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 let book = self.book(atIndex: 0)
                 tableView.reloadData()
+                MBProgressHUD.hide(for: view, animated: true)
+
                 //            if book?.bookID == "Title" {
                 //
                 //                return cell
@@ -290,6 +293,8 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
                   tableView.reloadData()
 
               } else {
+                logFavoriteTapped(referrer: referrer)
+
 
                 ref?.child(uid).child("Favorites").child(bookID ?? "").updateChildValues(["Author": author, "Name": name, "Image": imageURL])
 
@@ -465,7 +470,8 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
             let swipeUpRec = UISwipeGestureRecognizer()
             let swipeDownRec = UISwipeGestureRecognizer()
             let swipeRightRec = UISwipeGestureRecognizer()
-            
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
             queryforwishlists()
             
 //                                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)

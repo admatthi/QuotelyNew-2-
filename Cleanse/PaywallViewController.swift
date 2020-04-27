@@ -11,6 +11,7 @@ import Firebase
 import Purchases
 import FBSDKCoreKit
 import AppsFlyerLib
+import MBProgressHUD
 
 var refer = String()
 var onboarding = Bool()
@@ -31,7 +32,6 @@ class PaywallViewController: UIViewController {
     
     @IBOutlet weak var termstext: UILabel!
     @IBOutlet weak var disclaimertext: UIButton!
-    @IBOutlet weak var leadingtext: UILabel!
     var purchases = Purchases.configure(withAPIKey: "paCLaBYrGELMfdxuMQqbROxMfgDbcGGn", appUserID: nil)
     
     
@@ -66,8 +66,6 @@ class PaywallViewController: UIViewController {
     }
     @IBAction func tapBack(_ sender: Any) {
         
-        referrer = "Paywall"
-
         if onboarding {
             
             
@@ -85,14 +83,21 @@ class PaywallViewController: UIViewController {
         
         logTapSubscribeEvent(referrer : refer)
         
+        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
+        
         guard let package = offering?.availablePackages[0] else {
               print("No available package")
+            MBProgressHUD.hide(for: view, animated: true)
+
               return
           }
         
         
         Purchases.shared.purchasePackage(package) { (trans, info, error, cancelled) in
                   
+            MBProgressHUD.hide(for: self.view, animated: true)
+
                   if let error = error {
                       if let purchaseFailedHandler = self.delegate?.purchaseFailed {
                           purchaseFailedHandler(self, info, error, cancelled)
@@ -111,6 +116,8 @@ class PaywallViewController: UIViewController {
                           
                           didpurchase = true
                         
+                        MBProgressHUD.hide(for: self.view, animated: true)
+
                         AppsFlyerTracker.shared().trackEvent("purchase",
                         withValues: [
                             AFEventParamContentId:"1234567",
@@ -127,6 +134,8 @@ class PaywallViewController: UIViewController {
                           //
                           ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                           
+                        MBProgressHUD.hide(for: self.view, animated: true)
+
                           didpurchase = true
                           self.dismiss(animated: true, completion: nil)
                           
@@ -144,6 +153,7 @@ class PaywallViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var leadingtext: UILabel!
     
     @IBOutlet weak var tapcontinue: UIButton!
     override func viewDidLoad() {
@@ -151,17 +161,18 @@ class PaywallViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = backimage.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backimage.addSubview(blurEffectView)
-        
         tapcontinue.layer.cornerRadius = 5.0
         
         tapcontinue.clipsToBounds = true
         
         logPaywallShownEvent(referrer : referrer)
+        
+                                      let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                                         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                         blurEffectView.frame = backimage.bounds
+                                         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+                                      backimage.addSubview(blurEffectView)
         
         
         queryforpaywall()
@@ -195,21 +206,18 @@ class PaywallViewController: UIViewController {
             if let slimey = value?["Slimey"] as? String {
 
                 slimeybool = true
-                self.value1.text = "3 Day FREE Trial"
 
-                
+                self.leadingtext.text = "FREE 3 Day Trial"
                 self.termstext.alpha = 0
-                         self.leadingtext.alpha = 0
                         self.disclaimertext.alpha = 0
                          self.tapcontinue.setTitle("Try for FREE!", for: .normal)
                 
             } else {
                 
                 slimeybool = false
-                self.value1.text = "3 Day Free Trial"
+                self.leadingtext.text = "$39.99/year"
 
                 self.termstext.alpha = 1
-                  self.leadingtext.alpha = 1
                   self.disclaimertext.alpha = 1
                   self.tapcontinue.setTitle("Continue", for: .normal)
 
@@ -239,15 +247,15 @@ class PaywallViewController: UIViewController {
      */
     
     func logPaywallShownEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "paywall shown"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "paywall shown"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
     func logTapSubscribeEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "tap subscribe"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "tap subscribe"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
     func logPurchaseSuccessEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "purchase success"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "purchase success"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
 }

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
+import MBProgressHUD
 
 var backgroundimages = [UIImage]()
 
@@ -47,6 +48,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             
             let book = self.book(atIndex: 0)
             tableView.reloadData()
+            MBProgressHUD.hide(for: view, animated: true)
+
             //            if book?.bookID == "Title" {
             //
             //                return cell
@@ -345,6 +348,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
 
           } else {
 
+            logFavoriteTapped(referrer: referrer)
+
             ref?.child(uid).child("Favorites").child(bookID ?? "").updateChildValues(["Author": author, "Name": name, "Image": imageURL])
 
               wishlistids.append(bookID!)
@@ -516,6 +521,9 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         let swipeUpRec = UISwipeGestureRecognizer()
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
+        
+        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
         
         queryforwishlists()
         

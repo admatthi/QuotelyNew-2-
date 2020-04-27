@@ -81,7 +81,7 @@ class Onboarding2ViewController: UIViewController {
     }
     
     func logScreenView(referrer : String) {
-                                  AppEvents.logEvent(AppEvents.Name(rawValue: "Onboarding2"), parameters: ["" : ""])
+                                  AppEvents.logEvent(AppEvents.Name(rawValue: "Onboarding2"), parameters: ["genre" : "genre"])
                               }
       
     

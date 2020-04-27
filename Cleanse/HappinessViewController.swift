@@ -11,7 +11,7 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
-
+import MBProgressHUD
 func swipeRight(referrer : String) {
     AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"))
 }
@@ -44,6 +44,8 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
               
               let book = self.book(atIndex: 0)
               tableView.reloadData()
+            MBProgressHUD.hide(for: view, animated: true)
+
               //            if book?.bookID == "Title" {
               //
               //                return cell
@@ -296,6 +298,9 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
                 tableView.reloadData()
 
             } else {
+                
+                logFavoriteTapped(referrer: referrer)
+
 
               ref?.child(uid).child("Favorites").child(bookID ?? "").updateChildValues(["Author": author, "Name": name, "Image": imageURL])
 
@@ -510,7 +515,8 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
       override func viewDidLoad() {
           super.viewDidLoad()
           
-          
+          let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
           let swipeLeftRec = UISwipeGestureRecognizer()
           let swipeUpRec = UISwipeGestureRecognizer()
           let swipeDownRec = UISwipeGestureRecognizer()
@@ -582,7 +588,7 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           
           bookmarktapped = false
           
-            referrer = "Money Tapped Blur"
+            referrer = "Happiness Tapped Blur"
 
           
           // Do any additional setup after loading the view.
