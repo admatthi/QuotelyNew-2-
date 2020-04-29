@@ -351,124 +351,164 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
              func quoteViewed(id : String) {
                        AppEvents.logEvent(AppEvents.Name(rawValue: "quote viewed"), parameters: ["referrer" : referrer, "quoteid" : id])
                    }
+    
+    @objc func tapDownvote(sender: UIButton) {
+        
+
+               let generator = UIImpactFeedbackGenerator(style: .heavy)
+               generator.impactOccurred()
+
+        
+        books.remove(at: sender.tag)
+        
+    }
+    
+    @objc func tapShare2() {
+        
+        logTapShare(referrer: referrer)
+        
+        takeScreenshot()
+        let text = ""
+        
+        var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+        
+        let shareAll : Array = [image] as [Any]
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
              func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                 
-                 
-                 
-                 let book = self.book(atIndexPath: indexPath)
-                 
-                 let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
-                 cell.selectionStyle = .none
-                 if didpurchase || onboardinggenre == selectedgenre {
-                     
-                     MBProgressHUD.hide(for: view, animated: true)
+                         
+                         
+                         
+                         let book = self.book(atIndexPath: indexPath)
+                         
+                         let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
+                         cell.selectionStyle = .none
+                         if didpurchase || onboardinggenre == selectedgenre {
+                             
+                             MBProgressHUD.hide(for: view, animated: true)
 
-                 cell.author.text = book?.genre
-                 cell.quote.text = book?.headline1
-                     cell.selectionStyle = .none
-                 cell.taplike.tag = indexPath.row
-                 
-                 cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
-                 
-                 let backgroundcounter = Int.random(in: 1..<20)
+                         cell.author.text = book?.genre
+                         cell.quote.text = book?.headline1
+                         
+                         cell.taplike.tag = indexPath.row
+                             cell.tapdownvote.tag = indexPath.row
+                             
+                             id = book?.bookID ?? ""
+                         cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+                             
+                                cell.tapShare.addTarget(self, action: #selector(DepressionViewController.tapShare2), for: .touchUpInside)
+                             
+                                cell.tapdownvote.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+                             
+             //
+                         let backgroundcounter = Int.random(in: 1..<20)
+                             
+                             if let favoritenumber = book?.views {
+                                 
+             //                    cell.likesnumber.text = "\(String(favoritenumber))K"
+                                 
 
-                     id = book?.bookID ?? ""
+                             } else {
+                                 
+                                 ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                             }
 
-                 cell.likesnumber.text = "\(backgroundcounter)K"
-                 
-                     var bookiddata = book?.bookID ?? "x"
-                                     
-                                 quoteViewed(id: bookiddata)
-                     
-                                      
-                                      if let favoritenumber = book?.views {
+                             
+                             var bookiddata = book?.bookID ?? "x"
+                             
+                         quoteViewed(id: bookiddata)
+                         
+                         cell.selectionStyle = .none
+                   
+                             let dateFormatter = DateFormatter()
+                                          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                                           
-                                          cell.likesnumber.text = "\(String(favoritenumber))K"
                                           
-
-                                      } else {
+                                          let publisheddate = book?.date ?? "2020-03-31 14:37:21"
                                           
-                                          ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
-                                      }
-                     
-                 cell.selectionStyle = .none
-           let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                        
-                        
-                        let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-                        
-                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                        let date = dateFormatter.date(from:publisheddate)!
-                        
-                        let dateago = date.timeAgoSinceDate()
-                        
-                        cell.author.text = book?.genre
-                        cell.datelabel.text = dateago
-                 
-                 if wishlistids.contains(book!.bookID) {
-                     
-                     cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
+                                          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                          let date = dateFormatter.date(from:publisheddate)!
+                                          
+                                          let dateago = date.timeAgoSinceDate()
+                                          
+                                          cell.author.text = book?.genre
+             //                             cell.datelabel.text = dateago
+             //
+                         if wishlistids.contains(book!.bookID) {
 
-                     
-                 } else {
-                     
-                     cell.likesimage.image = UIImage(named: "WriteSmall Copy 5")
+                             cell.taplike.setBackgroundImage(UIImage(named: "DarkBookMark-1"), for: .normal)
 
-                 }
-                 
-                 //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
-                 //
-                 //
-                 //
-                 //        let today = Date()
-                 //        dateFormatter.dateFormat = "MMM dd"
-                 //        let datestring = dateFormatter.string(from: result ?? today)
-                 //
-                 //        cell.datelabel.text = datestring
-                 
-                 
-                 if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                     
-                     cell.profilepic.kf.setImage(with: imageUrl)
-                     
-                 }//
-                     cell.blurimage.alpha = 0
-                     cell.likesimage.alpha = 1
-                     
-                 } else {
-                     
-                     cell.likesimage.alpha = 0
-                     cell.blurimage.alpha = 1
-                     
-                     if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                                
-                                cell.profilepic.kf.setImage(with: imageUrl)
-                                
-                            }//
-                     
-                     let dateFormatter = DateFormatter()
-                       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                       
-                       
-                       let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-                       
-                       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                       let date = dateFormatter.date(from:publisheddate)!
-                       
-                       let dateago = date.timeAgoSinceDate()
-                       
-                       cell.author.text = book?.genre
-                       cell.datelabel.text = dateago
-                     cell.quote.text = ""
-                     cell.likesnumber.text = ""
-                     
-                 }
-                 
-                 return cell
-                 
-                 
-             }
+
+                         } else {
+
+                      
+                             cell.taplike.setBackgroundImage(UIImage(named: "LightBookMark-1"), for: .normal)
+
+                         }
+             //
+                         //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
+                         //
+                         //
+                         //
+                         //        let today = Date()
+                         //        dateFormatter.dateFormat = "MMM dd"
+                         //        let datestring = dateFormatter.string(from: result ?? today)
+                         //
+                         //        cell.datelabel.text = datestring
+                         
+                         
+                         if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+                             
+                             cell.profilepic.kf.setImage(with: imageUrl)
+                             
+                         }//
+                             cell.blurimage.alpha = 0
+             //                cell.likesimage.alpha = 1
+             cell.profilepic.alpha = 1
+                             
+                         } else {
+                             
+             //                cell.likesimage.alpha = 0
+                             cell.blurimage.alpha = 1
+                             
+                             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+                                        
+                                        cell.profilepic.kf.setImage(with: imageUrl)
+                                        
+                                    }//
+                             
+                             let dateFormatter = DateFormatter()
+                               dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                               
+                               
+                               let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                               
+                               dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                               let date = dateFormatter.date(from:publisheddate)!
+                               
+                               let dateago = date.timeAgoSinceDate()
+                               
+                               cell.author.text = ""
+                             cell.profilepic.alpha = 0
+             //                  cell.datelabel.text = dateago
+                             cell.quote.text = ""
+             //                cell.likesnumber.text = ""
+                             
+                         }
+                         
+                         return cell
+                         
+                         
+                     }
              override func viewDidLoad() {
                  super.viewDidLoad()
                  
@@ -855,7 +895,9 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
                              
                              self.books = newbooks
                              
-                             self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+//                             self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+                            
+                            self.books = self.books.shuffled()
                              
                          }
                          

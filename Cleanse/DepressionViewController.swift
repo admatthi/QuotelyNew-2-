@@ -323,6 +323,28 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
               return books.count
 
               }
+    
+    @objc func tapShare2() {
+        
+        logTapShare(referrer: referrer)
+        
+        takeScreenshot()
+        let text = ""
+        
+        var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+        
+        let shareAll : Array = [image] as [Any]
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
         
 
           @objc func tapLike(sender: UIButton) {
@@ -399,6 +421,17 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             })
 
         }
+    
+    @objc func tapDownvote(sender: UIButton) {
+        
+
+               let generator = UIImpactFeedbackGenerator(style: .heavy)
+               generator.impactOccurred()
+
+        
+        books.remove(at: sender.tag)
+        
+    }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
@@ -416,14 +449,21 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.quote.text = book?.headline1
             
             cell.taplike.tag = indexPath.row
+                cell.tapdownvote.tag = indexPath.row
+                
                 id = book?.bookID ?? ""
             cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
-            
+                
+                   cell.tapShare.addTarget(self, action: #selector(DepressionViewController.tapShare2), for: .touchUpInside)
+                
+                   cell.tapdownvote.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+                
+//
             let backgroundcounter = Int.random(in: 1..<20)
                 
                 if let favoritenumber = book?.views {
                     
-                    cell.likesnumber.text = "\(String(favoritenumber))K"
+//                    cell.likesnumber.text = "\(String(favoritenumber))K"
                     
 
                 } else {
@@ -450,19 +490,20 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                              let dateago = date.timeAgoSinceDate()
                              
                              cell.author.text = book?.genre
-                             cell.datelabel.text = dateago
-            
+//                             cell.datelabel.text = dateago
+//
             if wishlistids.contains(book!.bookID) {
-                
-                cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
 
-                
+                cell.taplike.setBackgroundImage(UIImage(named: "DarkBookMark-1"), for: .normal)
+
+
             } else {
-                
-                cell.likesimage.image = UIImage(named: "WriteSmall Copy 5")
+
+         
+                cell.taplike.setBackgroundImage(UIImage(named: "LightBookMark-1"), for: .normal)
 
             }
-            
+//
             //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
             //
             //
@@ -480,12 +521,12 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             }//
                 cell.blurimage.alpha = 0
-                cell.likesimage.alpha = 1
-                
+//                cell.likesimage.alpha = 1
+cell.profilepic.alpha = 1
                 
             } else {
                 
-                cell.likesimage.alpha = 0
+//                cell.likesimage.alpha = 0
                 cell.blurimage.alpha = 1
                 
                 if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
@@ -505,10 +546,11 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                   
                   let dateago = date.timeAgoSinceDate()
                   
-                  cell.author.text = book?.genre
-                  cell.datelabel.text = dateago
+                  cell.author.text = ""
+                cell.profilepic.alpha = 0
+//                  cell.datelabel.text = dateago
                 cell.quote.text = ""
-                cell.likesnumber.text = ""
+//                cell.likesnumber.text = ""
                 
             }
             
@@ -655,7 +697,6 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                 let dateago = date.timeAgoSinceDate()
                 
                 
-                timeagolabel.text = dateago
                 
                 id = book?.bookID ?? "x"
                 
@@ -865,7 +906,9 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         self.books = newbooks
                         
-                        self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+//                        self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+                        
+                        self.books = self.books.shuffled()
                         
                     }
                     

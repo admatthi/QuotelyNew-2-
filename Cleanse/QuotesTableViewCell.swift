@@ -14,7 +14,8 @@ class QuotesTableViewCell: UITableViewCell {
     @IBOutlet weak var quote: UILabel!
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var profilepic: UIImageView!
-    
+    @IBOutlet weak var tapdownvote: UIButton!
+    @IBOutlet weak var tapShare: UIButton!
     @IBOutlet weak var blurimage: UIImageView!
     @IBOutlet weak var taplike: UIButton!
     @IBOutlet weak var likesimage: UIImageView!
