@@ -124,7 +124,7 @@ async function sendHeadlineNotification() {
 
     var books = snapshot.val();
 
-    console.log("books ", books);
+    //console.log("books ", books);
 
     for (var bookId in books) {
 
@@ -157,19 +157,22 @@ async function sendToDevices(headerline) {
     //console.log("Push Token ", pushTokens);
     const pushTokenList = [];
     for (var token in pushTokens) {
-      console.log("headline ", headerline);
-      console.log("push token ", pushTokens[token]);
+      //console.log("headline ", headerline);
+      //console.log("push token ", pushTokens[token]);
       var token = pushTokens[token]
       pushTokenList.push(token);
+      //TO avoid limit of 1000 token as per single request
+      if(pushTokenList.length > 0 && pushTokenList.length >= 999 && pushTokenList.length <= 1000){
+        await sendPushNotification(pushTokenList, '', headerline, 0);
+        pushTokenList.splice(0,pushTokenList.length)
+        
+      }
     }
-    console.log("Push Token ", pushTokenList);
-    if (pushTokenList.length > 0) {
-      sendPushNotification(pushTokenList, ' ', headerline, 0);
-    }
+    
   });
 }
 
-function sendPushNotification(token, title, text, badge) {
+async function sendPushNotification(token, title, text, badge) {
 
   // console.log("from ID ", fromUserID, " fromUsername ", fromUsername);
 
@@ -191,7 +194,7 @@ function sendPushNotification(token, title, text, badge) {
   console.log('TOKEN', token);
   console.log('push notification sent ', payload);
 
-  admin.messaging().sendToDevice(token, payload)
+  await admin.messaging().sendToDevice(token, payload)
     .then((response) => {
       console.log('Successfully sent message:', response);
       // console.log('error message ', response['results']);
