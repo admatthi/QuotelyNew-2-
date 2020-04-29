@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,6 +42,8 @@
 		9D8B7761244D2FEB00D2A3F7 /* QuotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */; };
 		9D8C534D24201FA9004F35C7 /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */; };
 		9D98AA052450A60F00141C2D /* Onboarding3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D98AA042450A60F00141C2D /* Onboarding3ViewController.swift */; };
+		9DB2074524590BA3006E370D /* NoNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2074424590BA2006E370D /* NoNotificationsViewController.swift */; };
+		9DB2074724590BB0006E370D /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2074624590BAF006E370D /* NotificationsViewController.swift */; };
 		9DCEB53823DE0FBF00546242 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */; };
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
 		9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */; };
@@ -119,6 +121,8 @@
 		9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTableViewCell.swift; sourceTree = "<group>"; };
 		9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		9D98AA042450A60F00141C2D /* Onboarding3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3ViewController.swift; sourceTree = "<group>"; };
+		9DB2074424590BA2006E370D /* NoNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNotificationsViewController.swift; sourceTree = "<group>"; };
+		9DB2074624590BAF006E370D /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
 		9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				9D98AA042450A60F00141C2D /* Onboarding3ViewController.swift */,
+				9DB2074424590BA2006E370D /* NoNotificationsViewController.swift */,
+				9DB2074624590BAF006E370D /* NotificationsViewController.swift */,
 				9D19298C244E92ED005C1B28 /* Onboarding2ViewController.swift */,
 				9D19298A244E92D6005C1B28 /* Onboarding1ViewController.swift */,
 				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
@@ -298,8 +304,8 @@
 				9D7360DF236513DC00DC6ACB /* Sources */,
 				9D7360E0236513DC00DC6ACB /* Frameworks */,
 				9D7360E1236513DC00DC6ACB /* Resources */,
-				5185DEDA10B031C74C1493A3 /* [CP] Embed Pods Frameworks */,
 				9D1BBDEB2455F8DF00D63D95 /* ShellScript */,
+				22C5BD7BA9D1705D89347FE2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -446,13 +452,12 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5185DEDA10B031C74C1493A3 /* [CP] Embed Pods Frameworks */ = {
+		22C5BD7BA9D1705D89347FE2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cleanse/Pods-Cleanse-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cleanse/Pods-Cleanse-frameworks.sh",
@@ -469,7 +474,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cleanse/Pods-Cleanse-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -561,6 +565,7 @@
 				9D83FCD22434E9D200A1C759 /* ForYouViewController.swift in Sources */,
 				9D7360E7236513DC00DC6ACB /* AppDelegate.swift in Sources */,
 				9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */,
+				9DB2074724590BB0006E370D /* NotificationsViewController.swift in Sources */,
 				9D328D142365F5F0003768CF /* LikesViewController.swift in Sources */,
 				9D328D1E23665959003768CF /* GenreCollectionViewCell.swift in Sources */,
 				9D0663AF2367B3AA00385DEE /* Genre.swift in Sources */,
@@ -570,6 +575,7 @@
 				9D2D42562373360A003E21C1 /* EntriesViewController.swift in Sources */,
 				9DE8FCE3242469980035E3DA /* LoveViewController.swift in Sources */,
 				9D98AA052450A60F00141C2D /* Onboarding3ViewController.swift in Sources */,
+				9DB2074524590BA3006E370D /* NoNotificationsViewController.swift in Sources */,
 				9DCEB53823DE0FBF00546242 /* FavoritesViewController.swift in Sources */,
 				9D19298D244E92ED005C1B28 /* Onboarding2ViewController.swift in Sources */,
 				9DF6E6F023AC8B6E00DCB973 /* DepressionViewController.swift in Sources */,
@@ -767,7 +773,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.6.6;
+				MARKETING_VERSION = 4.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Quotely;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -794,7 +800,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.6.6;
+				MARKETING_VERSION = 4.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Quotely;
 				PROVISIONING_PROFILE_SPECIFIER = "";

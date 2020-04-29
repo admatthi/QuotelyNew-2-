@@ -156,12 +156,12 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         var i = 0
 //
-//        while i < headlines.count {
-//
-//            ref?.child("AllBooks1").child(selectedamazonurl).childByAutoId().updateChildValues(["Author" : selectedgenre, "Genre" : selectedgenre, "Author Image" : selectedauthorimage, "Date" : "2020-04-09 08:38:57", "Headline1" : headlines[i], "Description" : selecteddescription, "Image" : selectedbackground])
-//
-//            i += 1
-//        }
+        while i < headlines.count {
+
+            ref?.child("AllBooks1").child(selectedamazonurl).childByAutoId().updateChildValues(["Author" : selectedgenre, "Genre" : selectedgenre, "Author Image" : selectedauthorimage, "Date" : "2020-04-09 08:38:57", "Headline1" : headlines[i], "Description" : selecteddescription, "Image" : selectedbackground])
+
+            i += 1
+        }
 //
         
         let imageURLString = selectedbackground

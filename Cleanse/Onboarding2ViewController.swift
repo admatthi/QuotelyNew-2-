@@ -48,8 +48,8 @@ class Onboarding2ViewController: UIViewController {
     }
     @IBAction func tapTwo(_ sender: Any) {
         
-        onboardinggenre = "Relationships"
-        
+        onboardinggenre = "Love"
+
         logGenrePicked(referrer: onboardinggenre)
         
         ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])

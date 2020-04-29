@@ -26,14 +26,14 @@ class Onboarding3ViewController: UIViewController, UNUserNotificationCenterDeleg
                                  UIApplication.shared.registerForRemoteNotifications()
                               self.logNotificationsSettings(referrer: "true")
 
-                                self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+                                self.performSegue(withIdentifier: "Reminders", sender: self)
                              })
                          } else {
                                DispatchQueue.main.async(execute: {
                                                       UIApplication.shared.registerForRemoteNotifications()
                                                    self.logNotificationsSettings(referrer: "false")
 
-                                                     self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+                                                     self.performSegue(withIdentifier: "NoReminders", sender: self)
                                                   })
 
                     }

@@ -52,17 +52,17 @@ class HomeTabViewController: UITabBarController {
               mtab.backgroundImage = UIImage()
               mtab.shadowImage = UIImage()
         
-        if onboardinggenre == "Relationships" {
-            
-            self.selectedIndex = 2
+        if onboardinggenre == "Love" {
+               
+               self.selectedIndex = 0
 
-        }
-        
-        if onboardinggenre == "Money" {
-                   
-                   self.selectedIndex = 0
+           }
+           
+           if onboardinggenre == "Money" {
+                      
+                      self.selectedIndex = 2
 
-               }
+                  }
         
         if onboardinggenre == "Depression" {
                    
