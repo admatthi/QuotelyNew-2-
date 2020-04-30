@@ -382,8 +382,39 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                  })
 
              }
-      
     
+    @objc func tapDownvote(sender: UIButton) {
+        
+
+               let generator = UIImpactFeedbackGenerator(style: .heavy)
+               generator.impactOccurred()
+
+        
+        books.remove(at: sender.tag)
+        
+    }
+      
+    @objc func tapShare2() {
+        
+        logTapShare(referrer: referrer)
+        
+        takeScreenshot()
+        let text = ""
+        
+        var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+        
+        let shareAll : Array = [image] as [Any]
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
              
              func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                  
@@ -398,7 +429,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                  
                  cell.taplike.tag = indexPath.row
                  
-                 cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+                 cell.taplike.addTarget(self, action: #selector(FavoritesViewController.tapLike), for: .touchUpInside)
                  
                  let backgroundcounter = Int.random(in: 1..<20)
 
