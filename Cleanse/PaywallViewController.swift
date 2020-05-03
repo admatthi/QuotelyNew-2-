@@ -271,6 +271,7 @@ class PaywallViewController: UIViewController, UNUserNotificationCenterDelegate 
     //                slimeybool = true
     //
                     self.leadingtext.text = slimey
+    
     //                self.termstext.alpha = 0
     //                        self.disclaimertext.alpha = 0
     //                         self.tapcontinue.setTitle("Try for FREE!", for: .normal)
@@ -278,11 +279,14 @@ class PaywallViewController: UIViewController, UNUserNotificationCenterDelegate 
                 } else {
     //
     //                slimeybool = false
-                    self.leadingtext.text = "$19.99/year after 3 days free"
+                    self.leadingtext.text = "$19.99/year"
+                    self.headlinelabel.text = "Daily Quotes"
     //
     //                self.termstext.alpha = 1
     //                  self.disclaimertext.alpha = 1
     //                  self.tapcontinue.setTitle("Continue", for: .normal)
+                    self.tapcontinue.setTitle("Continue", for: .normal)
+                    
 
                 }
                 
