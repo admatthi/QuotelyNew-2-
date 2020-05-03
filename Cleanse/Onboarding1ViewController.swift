@@ -15,6 +15,7 @@ class Onboarding1ViewController: UIViewController, UNUserNotificationCenterDeleg
     @IBAction func tapNext(_ sender: Any) {
         
         logGetStarted(referrer: "onboarding1")
+        
         self.performSegue(withIdentifier: "step1tostep2", sender: self)
     }
     

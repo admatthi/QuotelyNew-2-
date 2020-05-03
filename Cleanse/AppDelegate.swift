@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
         Purchases.debugLogsEnabled = true
         Purchases.configure(withAPIKey: "paCLaBYrGELMfdxuMQqbROxMfgDbcGGn", appUserID: nil)
         
-        refer = "On Open"
+        referrer = "On Open"
         
         let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarBuyer : UITabBarController = mainStoryboardIpad.instantiateViewController(withIdentifier: "HomeTab") as! UITabBarController
@@ -92,38 +92,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
         
         dayweek = String(weekday)
         
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        
-        if launchedBefore {
-            
-     
-            
-        } else {
-            
-          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-               let initialViewController = storyboard.instantiateViewController(withIdentifier: "Onboarding1")
-               
-               self.window = UIWindow(frame: UIScreen.main.bounds)
-               self.window?.rootViewController = initialViewController
-               
-               self.window?.makeKeyAndVisible()
-                        
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            
-        }
-        
+//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//
+//        if launchedBefore {
+//
+//
+//
+//        } else {
+//
+//          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//               let initialViewController = storyboard.instantiateViewController(withIdentifier: "Onboarding1")
+//
+//               self.window = UIWindow(frame: UIScreen.main.bounds)
+//               self.window?.rootViewController = initialViewController
+//
+//               self.window?.makeKeyAndVisible()
+//
+//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//
+//        }
+//
         queryforpaywall()
         
 
         
         Messaging.messaging().delegate = self
 
-  
 
         return true
     }
-    
+  
     // [START receive_message]
       func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
           // If you are receiving a notification message while your app is in the background,

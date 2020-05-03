@@ -10,6 +10,8 @@ import UIKit
 
 class NotificationsViewController: UIViewController {
     @IBOutlet weak var slider: UISlider!
+    
+    
     @IBAction func tapSlider(_ sender: Any) {
         
         reminderlabel.text =

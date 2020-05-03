@@ -84,7 +84,8 @@ class ForYouViewController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
     }
     @IBOutlet weak var backimage: UIImageView!
-    
+    var backgroundimages = [UIImage]()
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {

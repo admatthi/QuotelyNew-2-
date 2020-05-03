@@ -154,15 +154,15 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         titlelabel.text = headlines[counter]
         
-        var i = 0
+//        var i = 0
+////
+//        while i < headlines.count {
 //
-        while i < headlines.count {
-
-            ref?.child("AllBooks1").child(selectedamazonurl).childByAutoId().updateChildValues(["Author" : selectedgenre, "Genre" : selectedgenre, "Author Image" : selectedauthorimage, "Date" : "2020-04-09 08:38:57", "Headline1" : headlines[i], "Description" : selecteddescription, "Image" : selectedbackground])
-
-            i += 1
-        }
+//            ref?.child("AllBooks1").child(selectedamazonurl).childByAutoId().updateChildValues(["Author" : selectedgenre, "Genre" : selectedgenre, "Author Image" : selectedauthorimage, "Date" : "2020-04-09 08:38:57", "Headline1" : headlines[i], "Description" : selecteddescription, "Image" : selectedbackground])
 //
+//            i += 1
+//        }
+////
         
         let imageURLString = selectedbackground
         

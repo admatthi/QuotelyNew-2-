@@ -12,7 +12,7 @@ import Purchases
 import FBSDKCoreKit
 import AppsFlyerLib
 import MBProgressHUD
-
+import UserNotifications
 var refer = String()
 var onboarding = Bool()
 
@@ -22,7 +22,7 @@ var onboarding = Bool()
     @objc optional func purchaseRestored(paywall: PaywallViewController, purchaserInfo: Purchases.PurchaserInfo?, error: Error?)
 }
 
-class PaywallViewController: UIViewController {
+class PaywallViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     var delegate : SwiftPaywallDelegate?
 
@@ -45,7 +45,7 @@ class PaywallViewController: UIViewController {
                     
                 } else {
                     
-                    self.logPurchaseSuccessEvent(referrer : refer)
+                    self.logPurchaseSuccessEvent(referrer : referrer)
                     //
                     ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                     
@@ -78,19 +78,53 @@ class PaywallViewController: UIViewController {
             if onboarding {
                 
                 
+                
                 self.performSegue(withIdentifier: "PaywallToTab", sender: self)
 
             } else {
+                
+
+                let center = UNUserNotificationCenter.current()
+                     center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                             if granted {
+                                 DispatchQueue.main.async(execute: {
+                                     UIApplication.shared.registerForRemoteNotifications()
+                                  self.logNotificationsSettingsTrue(referrer: "true")
+
+                                 })
+                             } else {
+                                   DispatchQueue.main.async(execute: {
+                                                          UIApplication.shared.registerForRemoteNotifications()
+                                                       self.logNotificationsSettingsFalse(referrer: "false")
+
+                                                      })
+
+                        }
+                      
+                      }
+
                 
                 self.dismiss(animated: true, completion: nil)
 
             }
             
         }
+    
+      
+        func logNotificationsSettingsTrue(referrer : String) {
+                                         AppEvents.logEvent(AppEvents.Name(rawValue: "notifications enabled"), parameters: ["value" : "true"])
+                                     }
+    
+      
+        func logNotificationsSettingsFalse(referrer : String) {
+                                         AppEvents.logEvent(AppEvents.Name(rawValue: "notifications enabled"), parameters: ["value" : "false"])
+                                     }
+    
+    
         @IBOutlet weak var backimage: UIImageView!
         @IBAction func tapContinue(_ sender: Any) {
             
-            logTapSubscribeEvent(referrer : refer)
+            logTapSubscribeEvent(referrer : referrer)
             
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
 

@@ -13,10 +13,11 @@ import FirebaseDatabase
 import FBSDKCoreKit
 import MBProgressHUD
 
-var backgroundimages = [UIImage]()
 
 class DepressionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
+    var backgroundimages = [UIImage]()
+
     func logFavoriteTapped(referrer : String) {
             AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
         }
@@ -125,7 +126,7 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
 
             
             
-            refer = "On Tap Discover"
+            referrer = selectedgenre
             counter = 0
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
@@ -434,130 +435,133 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
     }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-            
-            
-            let book = self.book(atIndexPath: indexPath)
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
-            cell.selectionStyle = .none
-            if didpurchase || onboardinggenre == selectedgenre {
-                
-                MBProgressHUD.hide(for: view, animated: true)
+                               
+                               
+                               
+                               let book = self.book(atIndexPath: indexPath)
+                               
+                               let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
+                               cell.selectionStyle = .none
+                     
+                     var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                cell.profilepic.image = backgroundimages[backgroundcounter]
+                     
+                               if didpurchase  {
+                       
+                                   
+                                   MBProgressHUD.hide(for: view, animated: true)
 
-            cell.author.text = book?.genre
-            cell.quote.text = book?.headline1
+                               cell.author.text = book?.genre
+                               cell.quote.text = book?.headline1
+                               
+                               cell.taplike.tag = indexPath.row
+                                   cell.tapdownvote.tag = indexPath.row
+                                   
+                                   id = book?.bookID ?? ""
+                               cell.taplike.addTarget(self, action: #selector(LoveViewController.tapLike), for: .touchUpInside)
+                                   
+                                      cell.tapShare.addTarget(self, action: #selector(LoveViewController.tapShare2), for: .touchUpInside)
+                                   
+                                      cell.tapdownvote.addTarget(self, action: #selector(LoveViewController.tapDownvote), for: .touchUpInside)
+                                   
+                               let backgroundcounter = Int.random(in: 1..<20)
+                                   
+                                   if let favoritenumber = book?.views {
             
-            cell.taplike.tag = indexPath.row
-                cell.tapdownvote.tag = indexPath.row
-                
-                id = book?.bookID ?? ""
-            cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
-                
-                   cell.tapShare.addTarget(self, action: #selector(DepressionViewController.tapShare2), for: .touchUpInside)
-                
-                   cell.tapdownvote.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
-                
-//
-            let backgroundcounter = Int.random(in: 1..<20)
-                
-                if let favoritenumber = book?.views {
-                    
-//                    cell.likesnumber.text = "\(String(favoritenumber))K"
-                    
+                                   } else {
+                                       
+                                       ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
+                                   }
 
-                } else {
-                    
-                    ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
-                }
+                                   
+                                   var bookiddata = book?.bookID ?? "x"
+                                   
+                               quoteViewed(id: bookiddata)
+                               
+                               cell.selectionStyle = .none
+                         
+                                   let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                                
+                                                
+                                                let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                                                
+                                                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                                let date = dateFormatter.date(from:publisheddate)!
+                                                
+                                                let dateago = date.timeAgoSinceDate()
+                                                
+                                                cell.author.text = book?.genre
+                   //                             cell.datelabel.text = dateago
+                   //
+                               if wishlistids.contains(book!.bookID) {
 
-                
-                var bookiddata = book?.bookID ?? "x"
-                
-            quoteViewed(id: bookiddata)
-            
-            cell.selectionStyle = .none
-      
-                let dateFormatter = DateFormatter()
-                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                             
-                             
-                             let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-                             
-                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                             let date = dateFormatter.date(from:publisheddate)!
-                             
-                             let dateago = date.timeAgoSinceDate()
-                             
-                             cell.author.text = book?.genre
-//                             cell.datelabel.text = dateago
-//
-            if wishlistids.contains(book!.bookID) {
-
-                cell.taplike.setBackgroundImage(UIImage(named: "DarkBookMark-1"), for: .normal)
+                                   cell.taplike.setBackgroundImage(UIImage(named: "DarkBookMark-1"), for: .normal)
 
 
-            } else {
+                               } else {
 
-         
-                cell.taplike.setBackgroundImage(UIImage(named: "LightBookMark-1"), for: .normal)
+                            
+                                   cell.taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
 
-            }
-//
-            //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
-            //
-            //
-            //
-            //        let today = Date()
-            //        dateFormatter.dateFormat = "MMM dd"
-            //        let datestring = dateFormatter.string(from: result ?? today)
-            //
-            //        cell.datelabel.text = datestring
-            
-            
-            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+                               }
+             
+                               
+        //                       if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+        //
+        //                           cell.profilepic.kf.setImage(with: imageUrl)
+        //
+        //                       }//
+                                   cell.blurimage.alpha = 0
+                   cell.profilepic.alpha = 1
+                                   
+                               } else {
+                                 
+                                 
+                                     
+                                     cell.blurimage.alpha = 1
+                                                       
+        //                                               if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+        //
+        //                                                          cell.profilepic.kf.setImage(with: imageUrl)
+        //
+        //                                                      }//
+                                                       
+                                                       let dateFormatter = DateFormatter()
+                                                         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                                         
+                                                         
+                                                         let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                                                         
+                                                         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                                         let date = dateFormatter.date(from:publisheddate)!
+                                                         
+                                                         let dateago = date.timeAgoSinceDate()
+                                                         
+                                                         cell.author.text = ""
+        //                                               cell.profilepic.alpha = 0
+                                       //                  cell.datelabel.text = dateago
+                                                       cell.quote.text = ""
+                                cell.tapShare.alpha = 0
+                                cell.taplike.alpha = 0
+                                cell.tapdownvote.alpha = 0
+                                 }
                 
-                cell.profilepic.kf.setImage(with: imageUrl)
                 
-            }//
-                cell.blurimage.alpha = 0
-//                cell.likesimage.alpha = 1
-cell.profilepic.alpha = 1
-                
-            } else {
-                
-//                cell.likesimage.alpha = 0
-                cell.blurimage.alpha = 1
-                
-                if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                           
-                           cell.profilepic.kf.setImage(with: imageUrl)
-                           
-                       }//
-                
-                let dateFormatter = DateFormatter()
-                  dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                  
-                  
-                  let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-                  
-                  dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                  let date = dateFormatter.date(from:publisheddate)!
-                  
-                  let dateago = date.timeAgoSinceDate()
-                  
-                  cell.author.text = ""
-                cell.profilepic.alpha = 0
-//                  cell.datelabel.text = dateago
-                cell.quote.text = ""
-//                cell.likesnumber.text = ""
-                
-            }
-            
-            return cell
-            
-            
-        }
+        //
+        //        if indexPath.row == 0 {
+        //            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        //            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //            blurEffectView.frame = cell.profilepic.bounds
+        //            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        blurEffectView.alpha = 1
+        //            cell.profilepic.addSubview(blurEffectView)
+        //
+        //        }
+                               return cell
+                               
+                               
+                           }
         override func viewDidLoad() {
             super.viewDidLoad()
             
@@ -571,6 +575,22 @@ cell.profilepic.alpha = 1
 
             
             queryforwishlists()
+            
+            backgroundimages.removeAll()
+                       backgroundimages.append(UIImage(named: "sunrise1")!)
+                       backgroundimages.append(UIImage(named: "sunrise2")!)
+                       backgroundimages.append(UIImage(named: "sunrise3")!)
+                       backgroundimages.append(UIImage(named: "sunrise4")!)
+                         backgroundimages.append(UIImage(named: "sunrise5")!)
+                         backgroundimages.append(UIImage(named: "sunrise6")!)
+                       backgroundimages.append(UIImage(named: "sunrise7")!)
+                         backgroundimages.append(UIImage(named: "sunrise8")!)
+                         backgroundimages.append(UIImage(named: "sunrise9")!)
+                       backgroundimages.append(UIImage(named: "sunrise10")!)
+                         backgroundimages.append(UIImage(named: "sunrise11")!)
+                         backgroundimages.append(UIImage(named: "sunrise12")!)
+                       
+                       backgroundcounter = Int.random(in: 0..<backgroundimages.count)
             
     //                            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
     //                               let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -942,14 +962,7 @@ cell.profilepic.alpha = 1
             ref?.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 let value = snapshot.value as? NSDictionary
-                
-                if let purchased2 = value?["Onboarding"] as? String {
-                    
-                    onboardinggenre = purchased2
-                } else {
-                    
-                    onboardinggenre = "Love"
-                }
+           
                 
                 if let purchased = value?["Purchased"] as? String {
                     
@@ -957,20 +970,25 @@ cell.profilepic.alpha = 1
                         
                         didpurchase = true
                         
+                        
                     } else {
                         
                         didpurchase = false
+                        
                         
                     }
                     
                 } else {
                     
                     didpurchase = false
+                    
                 }
                 
             })
             
         }
+    
+    
         
         /*
          // MARK: - Navigation

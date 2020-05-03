@@ -28,7 +28,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
              }
              
              var genres = [String]()
-             
+             var backgroundimages = [UIImage]()
+
              @IBOutlet weak var backimage: UIImageView!
              var books: [Book] = [] {
                  didSet {
@@ -70,7 +71,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
              @IBOutlet weak var tableView: UITableView!
              func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
                  
-                 refer = "On Tap Discover"
+                 referrer = selectedgenre
                  counter = 0
                  let generator = UIImpactFeedbackGenerator(style: .heavy)
                  generator.impactOccurred()
@@ -446,32 +447,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                  
               id = book?.bookID ?? ""
 
-                 let dateago = date.timeAgoSinceDate()
-              
-                               
-                               if let favoritenumber = book?.views {
-                                   
-                                   cell.likesnumber.text = "\(String(favoritenumber))K"
-                                   
-
-                               } else {
-                                   
-                                   ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Views" : backgroundcounter])
-                               }
-                 
-                 
-                 cell.datelabel.text = dateago
-                 
-                 if wishlistids.contains(book!.bookID) {
-                     
-                     cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
-
-                     
-                 } else {
-                     
-                     cell.likesimage.image = UIImage(named: "WriteSmall Copy 5")
-
-                 }
+                
+                                  
+                
                  
                  //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
                  //
@@ -489,6 +467,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                      cell.profilepic.kf.setImage(with: imageUrl)
                      
                  }//
+                
+                cell.blurimage.alpha = 0
                  
                  return cell
                  
