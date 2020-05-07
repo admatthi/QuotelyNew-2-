@@ -3,111 +3,128 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 var db = admin.database();
 
-// exports.devNotficationCheck = functions.pubsub.schedule('*/5 * * * *')
-//   .timeZone('Asia/Calcutta') // Users can choose timezone - default is America/Los_Angeles
-//   .onRun(async context => {
-
-//     console.log('This will be run every 5 minute CST!');
-//     // birthdayNotificationCheck("morning");
-//     await sendHeadlineNotification();
-//     return null;
-//   });
 
 exports.firstNotficationCheck = functions.pubsub.schedule('0 8 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 8:00 AM CST!');
-    // birthdayNotificationCheck("morning");
+    console.log('This will be run every day at 8:00 AM PST!');
+    // birthdayNotificationCheck("morning"); (America/Los_Angeles)
     await sendHeadlineNotification();
     return null;
   });
 
 exports.secondNotficationCheck = functions.pubsub.schedule('0 9 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 9:00 AM CST!');
+    console.log('This will be run every day at 9:00 AM PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.thirdNotficationCheck = functions.pubsub.schedule('0 10 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 9:00 AM CST!');
+    console.log('This will be run every day at 10:00 AM PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.forthNotficationCheck = functions.pubsub.schedule('0 11 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 11:00 AM CST!');
+    console.log('This will be run every day at 11:00 AM PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.fifthNotficationCheck = functions.pubsub.schedule('0 12 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 12:00 AM CST!');
+    console.log('This will be run every day at 12:00 AM PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.sixthNotficationCheck = functions.pubsub.schedule('0 13 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
 
-    console.log('This will be run every day at 13:00 AM CST!');
+    console.log('This will be run every day at 13:00 AM PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.seventhNotficationCheck = functions.pubsub.schedule('0 14 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
 
-    console.log('This will be run every day at 14:00  CST!');
+    console.log('This will be run every day at 14:00  PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.eighthNotficationCheck = functions.pubsub.schedule('0 15 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-
-    console.log('This will be run every day at 15:00 CST!');
+    console.log('This will be run every day at 15:00 PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.ninethNotficationCheck = functions.pubsub.schedule('0 16 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 16:00 CST!');
+    console.log('This will be run every day at 16:00 PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 exports.tenthNotficationCheck = functions.pubsub.schedule('0 17 * * *')
-  .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
   .onRun(async context => {
-    console.log('This will be run every day at 17:00 CST!');
+    console.log('This will be run every day at 17:00 PST!');
+    // birthdayNotificationCheck("morning");
+    await sendHeadlineNotification();
+    return null;
+  });
+
+  exports.eleventhNotficationCheck = functions.pubsub.schedule('0 18 * * *')
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
+  .onRun(async context => {
+    console.log('This will be run every day at 18:00 PST!');
+    // birthdayNotificationCheck("morning");
+    await sendHeadlineNotification();
+    return null;
+  });
+
+  exports.twelvethNotficationCheck = functions.pubsub.schedule('0 19 * * *')
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
+  .onRun(async context => {
+    console.log('This will be run every day at 19:00 PST!');
+    // birthdayNotificationCheck("morning");
+    await sendHeadlineNotification();
+    return null;
+  });
+
+  exports.thirteenNotficationCheck = functions.pubsub.schedule('0 20 * * *')
+  .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
+  .onRun(async context => {
+    console.log('This will be run every day at 20:00 PST!');
     // birthdayNotificationCheck("morning");
     await sendHeadlineNotification();
     return null;
   });
 
 // exports.testNotificationCheck = functions.pubsub.schedule('every 2 minutes')
-//   .timeZone('America/Costa_Rica') // Users can choose timezone - default is America/Los_Angeles
+//   .timeZone('America/Los_Angeles') // Users can choose timezone - default is America/Los_Angeles
 //   .onRun((context) => {
 
 //     console.log('This will be run every 1 minute');
@@ -161,14 +178,17 @@ async function sendToDevices(headerline) {
       //console.log("push token ", pushTokens[token]);
       var token = pushTokens[token]
       pushTokenList.push(token);
-      //TO avoid limit of 1000 token as per single request
-      if(pushTokenList.length > 0 && pushTokenList.length >= 999 && pushTokenList.length <= 1000){
+      if(pushTokenList.length > 0 && pushTokenList.length >= 10){
         await sendPushNotification(pushTokenList, '', headerline, 0);
-        pushTokenList.splice(0,pushTokenList.length)
-        
+        setTimeout(() => {
+          pushTokenList.splice(0,pushTokenList.length)
+        }, 500)
       }
     }
-    
+    // console.log("Push Token ", pushTokenList.length);
+    // if (pushTokenList.length > 0) {
+    //   sendPushNotification(pushTokenList, ' ', headerline, 0);
+    // }
   });
 }
 
